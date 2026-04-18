@@ -1,414 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us — Abhisaur Group</title>
-<link rel="stylesheet" href="/static/css/main.css">
-<style>
-.about-story {
-  padding: 8rem 5%;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 6rem; align-items: center;
-}
-.about-img-stack {
-  position: relative; height: 520px;
-}
-.about-img-1 {
-  position: absolute; right: 0; top: 0;
-  width: 78%; height: 380px;
-  background: var(--dark3);
-  border: 1px solid rgba(201,168,76,0.15);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 4rem;
-}
-.about-img-2 {
-  position: absolute; left: 0; bottom: 0;
-  width: 52%; height: 240px;
-  background: var(--gold);
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column;
-  z-index: 2; gap: 4px;
-}
-.about-img-2-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 3rem; font-weight: 700; color: var(--black);
-}
-.about-img-2-text {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 0.75rem; font-weight: 600;
-  letter-spacing: 2px; color: var(--black); text-transform: uppercase;
-}
-.about-text .section-title { margin: 0.5rem 0 1rem; }
-.about-text p { color: var(--gray); line-height: 1.9; margin-bottom: 1rem; }
-.about-highlights {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 1rem; margin: 2rem 0;
-}
-.highlight-item {
-  background: var(--dark2);
-  border-left: 2px solid var(--gold);
-  padding: 1rem 1.2rem;
-}
-.highlight-val {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.8rem; font-weight: 600; color: var(--gold);
-}
-.highlight-key {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 0.72rem; font-weight: 600;
-  letter-spacing: 2px; color: var(--gray);
-  text-transform: uppercase;
-}
-
-.values-section {
-  padding: 8rem 5%;
-  background: var(--dark2);
-}
-.values-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 2px; background: rgba(201,168,76,0.08);
-  margin-top: 4rem;
-}
-.value-card {
-  background: var(--dark2);
-  padding: 3rem 2rem; text-align: center;
-  transition: background 0.3s;
-}
-.value-card:hover { background: var(--dark3); }
-.value-icon { font-size: 2.5rem; margin-bottom: 1.2rem; display: block; }
-.value-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem; font-weight: 600; color: var(--white);
-  margin-bottom: 0.6rem;
-}
-.value-desc { color: var(--gray); font-size: 0.83rem; line-height: 1.7; }
-
-.founder-section {
-  padding: 8rem 5%;
-  display: grid; grid-template-columns: 1fr 2fr;
-  gap: 5rem; align-items: center;
-}
-.founder-photo {
-  width: 100%; aspect-ratio: 3/4;
-  background: var(--dark3);
-  border: 1px solid rgba(201,168,76,0.2);
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-}
-.founder-photo::after {
-  content: ''; position: absolute;
-  bottom: 0; left: 0; right: 0; height: 3px;
-  background: var(--gold);
-}
-.founder-photo-icon { font-size: 5rem; opacity: 0.3; }
-.founder-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem; font-weight: 600; color: var(--white);
-  margin-bottom: 0.3rem;
-}
-.founder-title {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 0.78rem; font-weight: 600;
-  letter-spacing: 3px; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 1.5rem;
-}
-.founder-quote {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem; font-style: italic;
-  color: var(--gray-light); line-height: 1.7;
-  border-left: 2px solid var(--gold);
-  padding-left: 1.5rem; margin: 1.5rem 0;
-}
-.founder-text { color: var(--gray); line-height: 1.9; }
-
-.timeline-section {
-  padding: 8rem 5%;
-  background: var(--dark);
-}
-.timeline { position: relative; max-width: 700px; margin: 4rem auto 0; }
-.timeline::before {
-  content: ''; position: absolute;
-  left: 50%; top: 0; bottom: 0; width: 1px;
-  background: linear-gradient(var(--gold-dark), var(--gold), var(--gold-dark));
-  transform: translateX(-50%);
-}
-.timeline-item {
-  display: flex; gap: 2rem;
-  margin-bottom: 3rem; align-items: flex-start;
-}
-.timeline-item:nth-child(even) { flex-direction: row-reverse; }
-.timeline-content {
-  flex: 1;
-  background: var(--dark2);
-  border: 1px solid rgba(201,168,76,0.1);
-  padding: 1.5rem; position: relative;
-}
-.timeline-item:nth-child(odd) .timeline-content { text-align: right; }
-.timeline-dot {
-  width: 16px; height: 16px; flex-shrink: 0;
-  background: var(--gold); border-radius: 50%;
-  margin-top: 1.2rem; position: relative; z-index: 1;
-}
-.timeline-year {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 0.72rem; font-weight: 700;
-  letter-spacing: 3px; color: var(--gold);
-  margin-bottom: 0.3rem;
-}
-.timeline-event {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem; font-weight: 600; color: var(--white);
-}
-.timeline-detail { color: var(--gray); font-size: 0.82rem; margin-top: 0.3rem; }
-
-@media (max-width: 768px) {
-  .about-story { grid-template-columns: 1fr; }
-  .about-img-stack { height: 350px; }
-  .values-grid { grid-template-columns: repeat(2, 1fr); }
-  .founder-section { grid-template-columns: 1fr; }
-  .founder-photo { max-width: 280px; margin: 0 auto; }
-  .timeline::before { left: 24px; }
-  .timeline-item, .timeline-item:nth-child(even) { flex-direction: row; }
-  .timeline-item:nth-child(odd) .timeline-content { text-align: left; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us — Abhisaur Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Rajdhani:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <style>
+        .logo-box { display: none; }
+        .logo-img-wrap {
+            display: flex !important;
+            align-items: center;
+        }
+        .logo-img-wrap img {
+            height: 44px; width: auto;
+            border-radius: 4px;
+        }
+        .founder-visual {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        .founder-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+        .footer-logo img {
+            height: 50px; width: auto; border-radius: 4px; margin-bottom: 0.5rem;
+        }
+    </style>
 </head>
 <body>
-<div class="cursor"></div>
-<div class="cursor-follower"></div>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <div class="logo-img-wrap">
+                    <img src="data:image/png;base64,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" alt="Abhisaur Group Logo">
+                </div>
+                <span class="logo-text">ABHISAUR <span class="logo-accent">GROUP</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/services" class="nav-link">Services</a></li>
+                <li><a href="/projects" class="nav-link">Projects</a></li>
+                <li><a href="/about" class="nav-link active">About</a></li>
+                <li><a href="/contact" class="nav-link nav-cta">Get Quote</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/">Home</a><a href="/services">Services</a>
+        <a href="/projects">Projects</a><a href="/about">About</a>
+        <a href="/contact">Get Quote</a>
+    </div>
 
-<nav>
-  <a href="/" class="nav-logo">
-    <div class="nav-logo-emblem">AS</div>
-    <span class="nav-logo-text">ABHISAUR <span>GROUP</span></span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="/">Home</a></li>
-    <li><a href="/services">Services</a></li>
-    <li><a href="/projects">Projects</a></li>
-    <li><a href="/about" class="active">About</a></li>
-    <li><a href="/contact" class="nav-cta">Get Quote</a></li>
-  </ul>
-  <div class="hamburger"><span></span><span></span><span></span></div>
-</nav>
-<div class="mobile-menu">
-  <span class="mobile-close">✕</span>
-  <a href="/">Home</a><a href="/services">Services</a>
-  <a href="/projects">Projects</a><a href="/about">About</a>
-  <a href="/contact">Get Quote</a>
-</div>
+    <section class="page-hero">
+        <div class="container">
+            <p class="page-tag">ABOUT</p>
+            <nav class="breadcrumb"><a href="/">Home</a> &rarr; About</nav>
+            <h1 class="page-title">Our Story</h1>
+            <div class="page-hero-badge">
+                <span>5+</span>
+                <p>Years of Trust</p>
+            </div>
+        </div>
+    </section>
 
-<div class="page-hero">
-  <div class="page-hero-bg-text">ABOUT</div>
-  <div class="page-hero-content">
-    <div class="page-breadcrumb"><a href="/">Home</a> → About</div>
-    <h1 class="page-hero-title">Our <span>Story</span></h1>
-  </div>
-</div>
+    <section class="about-story-section">
+        <div class="container">
+            <div class="about-story-grid">
+                <div class="about-story-text reveal">
+                    <p class="section-tag">Who We Are</p>
+                    <h2 class="section-title">Built on Trust &amp; Craft</h2>
+                    <p>Abhisaur Group was founded with a simple but powerful belief — that every family in India deserves a beautiful, well-built home, regardless of budget. We started as a small construction team in Rewa, Madhya Pradesh, and have grown into a full-service construction and interior design firm with 200+ completed projects.</p>
+                    <p>What sets us apart is our commitment to budget-friendliness without compromising quality. We work closely with every client — from the first consultation to the final handover — ensuring your vision is realized exactly as you imagined it.</p>
+                    <div class="about-stats">
+                        <div><span class="counter" data-target="200">0</span><span>+</span><p>Projects Done</p></div>
+                        <div><span class="counter" data-target="5">0</span><span>+</span><p>Years Active</p></div>
+                        <div><span class="counter" data-target="150">0</span><span>+</span><p>Happy Clients</p></div>
+                        <div><span class="counter" data-target="100">0</span><span>%</span><p>Satisfaction Rate</p></div>
+                    </div>
+                    <a href="/contact" class="btn btn-primary">Work With Us &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- STORY -->
-<section class="about-story">
-  <div class="about-img-stack reveal-left">
-    <div class="about-img-1">🏗️</div>
-    <div class="about-img-2">
-      <div class="about-img-2-num">5+</div>
-      <div class="about-img-2-text">Years of Trust</div>
-    </div>
-  </div>
-  <div class="about-text reveal-right">
-    <div class="section-tag">Who We Are</div>
-    <h2 class="section-title">Built on <span>Trust & Craft</span></h2>
-    <div class="gold-line"></div>
-    <p>Abhisaur Group was founded with a simple but powerful belief — that every family in India deserves a beautiful, well-built home, regardless of budget. We started as a small construction team in Rewa, Madhya Pradesh, and have grown into a full-service construction and interior design firm with 200+ completed projects.</p>
-    <p>What sets us apart is our commitment to budget-friendliness without compromising quality. We work closely with every client — from the first consultation to the final handover — ensuring your vision is realized exactly as you imagined it.</p>
-    <div class="about-highlights">
-      <div class="highlight-item">
-        <div class="highlight-val">200+</div>
-        <div class="highlight-key">Projects Done</div>
-      </div>
-      <div class="highlight-item">
-        <div class="highlight-val">5+</div>
-        <div class="highlight-key">Years Active</div>
-      </div>
-      <div class="highlight-item">
-        <div class="highlight-val">150+</div>
-        <div class="highlight-key">Happy Clients</div>
-      </div>
-      <div class="highlight-item">
-        <div class="highlight-val">100%</div>
-        <div class="highlight-key">Satisfaction Rate</div>
-      </div>
-    </div>
-    <a href="/contact" class="btn-gold">Work With Us →</a>
-  </div>
-</section>
+    <!-- FOUNDER SECTION -->
+    <section class="founder-section">
+        <div class="container">
+            <div class="founder-grid">
+                <div class="founder-visual reveal" style="height: 520px;">
+                    <img src="data:image/png;base64,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" alt="Abhishek Singh — Founder, Abhisaur Group">
+                    <div style="position:absolute; bottom:0; left:0; right:0; padding:2rem;
+                        background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+                        border-radius: 0 0 12px 12px;">
+                        <p style="color: var(--gold); font-family: Rajdhani, sans-serif; letter-spacing:2px; font-size:0.8rem;">B.Tech Civil Engineering</p>
+                        <p style="color: white; font-family: Cormorant Garamond, serif; font-size: 1.4rem; margin-top: 0.2rem;">Engineer Abhishek Singh</p>
+                    </div>
+                </div>
+                <div class="founder-content reveal">
+                    <p class="section-tag">Leadership</p>
+                    <h2>Abhishek Singh</h2>
+                    <p class="founder-role">Founder &amp; Principal Designer</p>
+                    <blockquote class="founder-quote">"I started Abhisaur Group because I saw too many families compromise on their dream home due to budget constraints. My mission is to prove that you can have both — quality and affordability."</blockquote>
+                    <p>With over 5 years of hands-on experience in construction and interior design, Abhishek leads every project personally. His approach combines deep technical knowledge with a keen eye for aesthetics — ensuring every space is both structurally sound and visually stunning.</p>
+                    <div class="founder-links">
+                        <a href="https://www.youtube.com/@AbhisaurGroup" target="_blank" class="btn btn-outline">YouTube Channel &rarr;</a>
+                        <a href="https://www.instagram.com/abhisaurgroup/" target="_blank" class="btn btn-outline">Instagram &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- FOUNDER -->
-<section class="founder-section" style="background:var(--dark);">
-  <div class="founder-photo reveal-left">
-    <div class="founder-photo-icon">👨‍💼</div>
-  </div>
-  <div class="reveal-right">
-    <div class="section-tag">Leadership</div>
-    <div class="founder-name">Abhishek Singh</div>
-    <div class="founder-title">Founder & Principal Designer</div>
-    <div class="gold-line"></div>
-    <div class="founder-quote">
-      "I started Abhisaur Group because I saw too many families compromise on their dream home due to budget constraints. My mission is to prove that you can have both — quality and affordability."
-    </div>
-    <p class="founder-text">With over 5 years of hands-on experience in construction and interior design, Abhishek leads every project personally. His approach combines deep technical knowledge with a keen eye for aesthetics — ensuring every space is both structurally sound and visually stunning.</p>
-    <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;">
-      <a href="https://www.youtube.com/@AbhisaurGroup" target="_blank" class="btn-outline">YouTube Channel →</a>
-      <a href="https://www.instagram.com/abhisaurgroup/" target="_blank" class="btn-outline">Instagram →</a>
-    </div>
-  </div>
-</section>
+    <!-- VALUES -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <p class="section-tag">Our Foundation</p>
+                <h2 class="section-title">What We Stand For</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card reveal">
+                    <div class="value-icon">Rs</div>
+                    <h3>Budget First</h3>
+                    <p>We design around your budget — never compromising on what matters most to you.</p>
+                </div>
+                <div class="value-card reveal">
+                    <div class="value-icon">Q</div>
+                    <h3>Quality Always</h3>
+                    <p>Premium materials, skilled labour, and meticulous attention to detail — every time.</p>
+                </div>
+                <div class="value-card reveal">
+                    <div class="value-icon">HT</div>
+                    <h3>Honest &amp; Transparent</h3>
+                    <p>Clear pricing, honest timelines, and no hidden surprises — ever.</p>
+                </div>
+                <div class="value-card reveal">
+                    <div class="value-icon">OT</div>
+                    <h3>On-Time Delivery</h3>
+                    <p>We respect your time. Projects are completed as promised, or we make it right.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- VALUES -->
-<section class="values-section">
-  <div style="text-align:center;" class="reveal">
-    <div class="section-tag" style="justify-content:center;">Our Foundation</div>
-    <h2 class="section-title">What We <span>Stand For</span></h2>
-  </div>
-  <div class="values-grid">
-    <div class="value-card reveal">
-      <span class="value-icon">💰</span>
-      <div class="value-name">Budget First</div>
-      <div class="value-desc">We design around your budget — never compromising on what matters most to you.</div>
-    </div>
-    <div class="value-card reveal" style="transition-delay:0.1s">
-      <span class="value-icon">🏆</span>
-      <div class="value-name">Quality Always</div>
-      <div class="value-desc">Premium materials, skilled labour, and meticulous attention to detail — every time.</div>
-    </div>
-    <div class="value-card reveal" style="transition-delay:0.2s">
-      <span class="value-icon">🤝</span>
-      <div class="value-name">Honest & Transparent</div>
-      <div class="value-desc">Clear pricing, honest timelines, and no hidden surprises — ever.</div>
-    </div>
-    <div class="value-card reveal" style="transition-delay:0.3s">
-      <span class="value-icon">⚡</span>
-      <div class="value-name">On-Time Delivery</div>
-      <div class="value-desc">We respect your time. Projects are completed as promised, or we make it right.</div>
-    </div>
-  </div>
-</section>
+    <!-- TIMELINE -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <p class="section-tag">Our Journey</p>
+                <h2 class="section-title">How We Grew</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item reveal"><div class="timeline-year">2019</div><div class="timeline-content"><h3>Founded in Rewa</h3><p>Started with a small team and big dreams — first residential project completed.</p></div></div>
+                <div class="timeline-item reveal"><div class="timeline-year">2020–21</div><div class="timeline-content"><h3>50 Projects Milestone</h3><p>Expanded into interior design services, crossed 50 completed projects.</p></div></div>
+                <div class="timeline-item reveal"><div class="timeline-year">2022</div><div class="timeline-content"><h3>YouTube Channel Launched</h3><p>Started sharing budget-friendly design content — 1000+ subscribers achieved.</p></div></div>
+                <div class="timeline-item reveal"><div class="timeline-year">2023</div><div class="timeline-content"><h3>Commercial Expansion</h3><p>Added 3D planning and commercial construction to our service portfolio.</p></div></div>
+                <div class="timeline-item reveal"><div class="timeline-year">2024–25</div><div class="timeline-content"><h3>200+ Projects &amp; Beyond</h3><p>Crossed 200 projects, 150+ happy clients, now serving entire MP region.</p></div></div>
+            </div>
+        </div>
+    </section>
 
-<!-- TIMELINE -->
-<section class="timeline-section">
-  <div style="text-align:center;" class="reveal">
-    <div class="section-tag" style="justify-content:center;">Our Journey</div>
-    <h2 class="section-title">How We <span>Grew</span></h2>
-  </div>
-  <div class="timeline">
-    <div class="timeline-item reveal">
-      <div class="timeline-content">
-        <div class="timeline-year">2019</div>
-        <div class="timeline-event">Founded in Rewa</div>
-        <div class="timeline-detail">Started with a small team and big dreams — first residential project completed.</div>
-      </div>
-      <div class="timeline-dot"></div>
-      <div style="flex:1"></div>
-    </div>
-    <div class="timeline-item reveal">
-      <div style="flex:1"></div>
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
-        <div class="timeline-year">2020–21</div>
-        <div class="timeline-event">50 Projects Milestone</div>
-        <div class="timeline-detail">Expanded into interior design services, crossed 50 completed projects.</div>
-      </div>
-    </div>
-    <div class="timeline-item reveal">
-      <div class="timeline-content">
-        <div class="timeline-year">2022</div>
-        <div class="timeline-event">YouTube Channel Launched</div>
-        <div class="timeline-detail">Started sharing budget-friendly design content — 1000+ subscribers achieved.</div>
-      </div>
-      <div class="timeline-dot"></div>
-      <div style="flex:1"></div>
-    </div>
-    <div class="timeline-item reveal">
-      <div style="flex:1"></div>
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
-        <div class="timeline-year">2023</div>
-        <div class="timeline-event">Commercial Expansion</div>
-        <div class="timeline-detail">Added 3D planning and commercial construction to our service portfolio.</div>
-      </div>
-    </div>
-    <div class="timeline-item reveal">
-      <div class="timeline-content">
-        <div class="timeline-year">2024–25</div>
-        <div class="timeline-event">200+ Projects & Beyond</div>
-        <div class="timeline-detail">Crossed 200 projects, 150+ happy clients, now serving entire MP region.</div>
-      </div>
-      <div class="timeline-dot"></div>
-      <div style="flex:1"></div>
-    </div>
-  </div>
-</section>
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content reveal">
+                <h2>Ready to Build Your Dream?</h2>
+                <p>Join 150+ happy families who trusted Abhisaur Group with their most important project.</p>
+                <div class="cta-buttons">
+                    <a href="/contact" class="btn btn-primary">Get Free Consultation &rarr;</a>
+                    <a href="https://wa.me/919399313486" class="btn btn-whatsapp" target="_blank">WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section style="padding:6rem 5%;background:var(--dark2);text-align:center;">
-  <h2 class="section-title reveal">Ready to Build Your <span>Dream?</span></h2>
-  <p style="color:var(--gray);margin:1rem auto 2.5rem;max-width:460px;line-height:1.8;" class="reveal">Join 150+ happy families who trusted Abhisaur Group with their most important project.</p>
-  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;" class="reveal">
-    <a href="/contact" class="btn-gold">Get Free Consultation →</a>
-    <a href="https://wa.me/919399313486" target="_blank" class="btn-outline">💬 WhatsApp</a>
-  </div>
-</section>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="data:image/png;base64,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" alt="Abhisaur Group">
+                    <span>ABHISAUR GROUP</span>
+                </div>
+                <p>Budget-friendly construction and interior design services in Rewa, MP.</p>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/abhisaurgroup/" target="_blank">IG</a>
+                    <a href="https://www.youtube.com/@AbhisaurGroup" target="_blank">YT</a>
+                    <a href="https://wa.me/919399313486" target="_blank">WA</a>
+                </div>
+            </div>
+            <div class="footer-col"><h4>Services</h4><ul>
+                <li><a href="/services#construction">Construction</a></li>
+                <li><a href="/services#interior">Interior Design</a></li>
+                <li><a href="/services#exterior">Exterior Design</a></li>
+                <li><a href="/services#planning">3D Planning</a></li>
+            </ul></div>
+            <div class="footer-col"><h4>Company</h4><ul>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/projects">Projects</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul></div>
+            <div class="footer-col"><h4>Contact</h4>
+                <p>Beside Greenland Marriage Garden, Dwarka Nagar, Rewa &ndash; 486001</p>
+                <a href="tel:+919399313486">+91 93993 13486</a>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 Abhisaur Group. All rights reserved. | Crafted with &hearts; in Rewa, MP</p></div>
+    </footer>
 
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-brand-name">ABHISAUR <span>GROUP</span></div>
-      <p class="footer-desc">Budget-friendly construction and interior design services in Rewa, MP.</p>
-      <div class="footer-social">
-        <a href="https://www.instagram.com/abhisaurgroup/" target="_blank">IG</a>
-        <a href="https://www.youtube.com/@AbhisaurGroup" target="_blank">YT</a>
-        <a href="https://wa.me/919399313486" target="_blank">WA</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-heading">Services</div>
-      <ul class="footer-links">
-        <li><a href="/services#construction">Construction</a></li>
-        <li><a href="/services#interior">Interior Design</a></li>
-        <li><a href="/services#exterior">Exterior Design</a></li>
-        <li><a href="/services#planning">3D Planning</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-heading">Company</div>
-      <ul class="footer-links">
-        <li><a href="/about">About Us</a></li>
-        <li><a href="/projects">Projects</a></li>
-        <li><a href="/contact">Contact</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-heading">Contact</div>
-      <div class="footer-contact-item">
-        <span class="footer-contact-icon">📍</span>
-        <span>Beside Greenland Marriage Garden, Dwarka Nagar, Rewa – 486001</span>
-      </div>
-      <div class="footer-contact-item">
-        <span class="footer-contact-icon">📞</span>
-        <span><a href="tel:+919399313486" style="color:var(--gray);text-decoration:none;">+91 93993 13486</a></span>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copy">© 2025 <span>Abhisaur Group</span>. All rights reserved.</div>
-    <div class="footer-copy">Crafted with ♥ in Rewa, MP</div>
-  </div>
-</footer>
-
-<a href="https://wa.me/919399313486" class="whatsapp-float" target="_blank">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.139.563 4.148 1.546 5.887L.057 23.943l6.212-1.458A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.793 9.793 0 01-5.034-1.388l-.361-.214-3.741.979 1.001-3.651-.235-.374A9.793 9.793 0 012.182 12c0-5.413 4.405-9.818 9.818-9.818 5.413 0 9.818 4.405 9.818 9.818 0 5.413-4.405 9.818-9.818 9.818z"/></svg>
-</a>
-
-<script src="/static/js/main.js"></script>
+    <a href="https://wa.me/919399313486" class="whatsapp-float" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+    <script src="/static/js/main.js"></script>
 </body>
 </html>
