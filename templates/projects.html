@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Abhisaur Group</title>
+<link rel="stylesheet" href="/static/css/main.css">
+<style>
+.filter-bar {
+  padding: 3rem 5% 2rem;
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  background: var(--dark);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+.filter-btn {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gray); background: transparent;
+  padding: 8px 20px;
+  border: 1px solid rgba(201,168,76,0.2);
+  cursor: pointer; transition: all 0.3s;
+}
+.filter-btn.active, .filter-btn:hover {
+  color: var(--black); background: var(--gold);
+  border-color: var(--gold);
+}
+.portfolio-section { padding: 4rem 5% 8rem; }
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px; background: rgba(201,168,76,0.06);
+}
+.portfolio-item {
+  position: relative; overflow: hidden;
+  background: var(--dark2); cursor: pointer;
+  aspect-ratio: 4/3;
+  transition: all 0.4s;
+}
+.portfolio-item.hidden { display: none; }
+.portfolio-img {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
+  transition: transform 0.6s ease;
+}
+.portfolio-item:hover .portfolio-img { transform: scale(1.08); }
+.portfolio-info {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 55%);
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 1.5rem;
+  transform: translateY(8px); opacity: 0;
+  transition: all 0.4s;
+}
+.portfolio-item:hover .portfolio-info { transform: translateY(0); opacity: 1; }
+.portfolio-tag-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 4px;
+}
+.portfolio-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; color: var(--white); font-weight: 600;
+}
+.portfolio-loc { color: var(--gray); font-size: 0.78rem; margin-top: 4px; }
+
+/* Big featured items */
+.portfolio-item.wide { grid-column: span 2; }
+.portfolio-item.tall { grid-row: span 2; aspect-ratio: auto; min-height: 500px; }
+
+.yt-section {
+  padding: 6rem 5%;
+  background: var(--dark);
+  text-align: center;
+}
+.yt-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; margin-top: 3rem;
+}
+.yt-card {
+  background: var(--dark2);
+  border: 1px solid rgba(201,168,76,0.1);
+  overflow: hidden; transition: border-color 0.3s;
+}
+.yt-card:hover { border-color: rgba(201,168,76,0.4); }
+.yt-thumb {
+  position: relative; padding-top: 56.25%;
+  background: var(--dark3);
+}
+.yt-thumb iframe {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+.yt-card-info { padding: 1rem 1.2rem; }
+.yt-card-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600; color: var(--white);
+  font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .portfolio-item.wide { grid-column: span 1; }
+  .yt-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-emblem">AS</div>
+    <span class="nav-logo-text">ABHISAUR <span>GROUP</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/services">Services</a></li>
+    <li><a href="/projects" class="active">Projects</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Quote</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <span class="mobile-close">✕</span>
+  <a href="/">Home</a><a href="/services">Services</a>
+  <a href="/projects">Projects</a><a href="/about">About</a>
+  <a href="/contact">Get Quote</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-bg-text">WORK</div>
+  <div class="page-hero-content">
+    <div class="page-breadcrumb"><a href="/">Home</a> → Projects</div>
+    <h1 class="page-hero-title">Our <span>Portfolio</span></h1>
+  </div>
+</div>
+
+<!-- FILTER -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All Projects</button>
+  <button class="filter-btn" data-filter="construction">Construction</button>
+  <button class="filter-btn" data-filter="interior">Interior</button>
+  <button class="filter-btn" data-filter="exterior">Exterior</button>
+  <button class="filter-btn" data-filter="renovation">Renovation</button>
+  <button class="filter-btn" data-filter="planning">3D Planning</button>
+</div>
+
+<!-- PORTFOLIO GRID -->
+<section class="portfolio-section">
+  <div class="portfolio-grid">
+    <div class="portfolio-item wide reveal" data-category="interior">
+      <div class="portfolio-img" style="background:linear-gradient(135deg,#1a1208,#2e2010);">🛋️</div>
+      <div class="portfolio-info">
+        <div class="portfolio-tag-label">Interior · Residential</div>
+        <div class="portfolio-name">Modern Living Room — Rewa Villa</div>
+        <div class="portfolio-loc">📍 Rewa, MP</div>
+      </div>
+    </div>
+    <div class="portfolio-item tall reveal" data-category="construction" style="transition-delay:0.1s">
+      <div class="portfolio-img" style="background:linear-gradient(135deg,#0e1a10,#162014);">🏗️</div>
+      <div class="portfolio-info">
+        <div class="portfolio-tag-label">Construction · Commercial</div>
+        <div class="portfolio-name">G+2 Office Building</div>
+        <div class="portfolio-loc">📍 Rewa, MP</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal" data-category="exterior" style="transition-delay:0.2s">
+      <div class="portfolio-img" style="background:linear-gradient(135deg,#180a0a,#200e10);">🏠</div>
+      <div class="portfolio-info">
+        <div class="portfolio-tag-label">Exterior · Facade</div>
+        <div class="portfolio-name">Premium Home Elevation</div>
+        <div class="portfolio-loc">📍 Satna, MP</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal" data-category="interior" style="transition-delay:0.1s">
+      <div class="portfolio-img" style="background:linear-gradient(135deg,#0a0e18,#10152a);">🍳</div>
+      <div class="portfolio-info">
+        <div class="portfolio-tag-label">Interior · Kitchen</div>
+        <div class="portfolio-name">Modular Kitchen Design</div>
+        <div class="portfolio-loc">📍 Rewa, MP</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal" data-category="planning" style="transition-delay:0.2s">
+      <div class="portfolio-img" style="background:linear-gradient(135deg,#181218,#22162a);">📐</div>
+      <div class="portfolio-info">
+        <div class="portfolio-tag-label">3D Planning · Residential</div>
+        <div class="portfolio-name">4BHK Floor Plan & Render</div>
+        <div class="portfolio-loc">📍 Rewa, MP</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal" data-category="renovation" style="transition-delay:0.3s">
+      <div class="portfolio-img" style="background:linear-gradient(135deg,#0e1818,#102020);">🔧</div>
+      <div class="portfolio-info">
+        <div class="portfolio-tag-label">Renovation · Full Home</div>
+        <div class="portfolio-name">Complete Home Makeover</div>
+        <div class="portfolio-loc">📍 Rewa, MP</div>
+      </div>
+    </div>
+    <div class="portfolio-item wide reveal" data-category="exterior" style="transition-delay:0.1s">
+      <div class="portfolio-img" style="background:linear-gradient(135deg,#141008,#201808);">🌿</div>
+      <div class="portfolio-info">
+        <div class="portfolio-tag-label">Exterior · Landscaping</div>
+        <div class="portfolio-name">Garden & Compound Design — Luxury Bungalow</div>
+        <div class="portfolio-loc">📍 Rewa, MP</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal" data-category="interior" style="transition-delay:0.2s">
+      <div class="portfolio-img" style="background:linear-gradient(135deg,#100a18,#180e22);">🛏️</div>
+      <div class="portfolio-info">
+        <div class="portfolio-tag-label">Interior · Bedroom</div>
+        <div class="portfolio-name">Master Bedroom Suite</div>
+        <div class="portfolio-loc">📍 Satna, MP</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal" data-category="construction" style="transition-delay:0.3s">
+      <div class="portfolio-img" style="background:linear-gradient(135deg,#0a1014,#10181e);">🏢</div>
+      <div class="portfolio-info">
+        <div class="portfolio-tag-label">Construction · Residential</div>
+        <div class="portfolio-name">3BHK Duplex Home</div>
+        <div class="portfolio-loc">📍 Rewa, MP</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YOUTUBE -->
+<section class="yt-section">
+  <div class="section-tag reveal" style="justify-content:center;">Video Showcase</div>
+  <h2 class="section-title reveal">Watch Our <span>Projects</span> in Action</h2>
+  <div class="yt-grid">
+    <div class="yt-card reveal">
+      <div class="yt-thumb">
+        <iframe src="https://www.youtube.com/embed/42W3zhNGAZI" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="yt-card-info">
+        <div class="yt-card-title">Construction & Interior Showcase</div>
+      </div>
+    </div>
+    <div class="yt-card reveal" style="transition-delay:0.1s">
+      <div class="yt-thumb" style="display:flex;align-items:center;justify-content:center;position:relative;padding-top:56.25%;background:var(--dark3);">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;">
+          <div style="font-size:2rem;">▶️</div>
+          <div style="font-family:'Rajdhani',sans-serif;color:var(--gray);font-size:0.75rem;letter-spacing:2px;">MORE ON YOUTUBE</div>
+        </div>
+      </div>
+      <div class="yt-card-info">
+        <div class="yt-card-title">Interior Design Projects</div>
+      </div>
+    </div>
+    <div class="yt-card reveal" style="transition-delay:0.2s">
+      <div class="yt-thumb" style="position:relative;padding-top:56.25%;background:var(--dark3);">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;">
+          <div style="font-size:2rem;">🏠</div>
+          <div style="font-family:'Rajdhani',sans-serif;color:var(--gray);font-size:0.75rem;letter-spacing:2px;">SUBSCRIBE FOR MORE</div>
+        </div>
+      </div>
+      <div class="yt-card-info">
+        <div class="yt-card-title">Home Construction Timelapse</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:2.5rem;" class="reveal">
+    <a href="https://www.youtube.com/@AbhisaurGroup" target="_blank" class="btn-gold">
+      Subscribe on YouTube →
+    </a>
+  </div>
+</section>
+
+<section style="padding:6rem 5%;background:var(--dark2);text-align:center;">
+  <h2 class="section-title reveal">Like What You <span>See?</span></h2>
+  <p style="color:var(--gray);margin:1rem auto 2.5rem;max-width:480px;line-height:1.8;" class="reveal">Let's create something even better for your space.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;" class="reveal">
+    <a href="/contact" class="btn-gold">Start Your Project →</a>
+    <a href="https://wa.me/919399313486" target="_blank" class="btn-outline">💬 WhatsApp Us</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">ABHISAUR <span>GROUP</span></div>
+      <p class="footer-desc">Budget-friendly construction and interior design services in Rewa, MP.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/abhisaurgroup/" target="_blank">IG</a>
+        <a href="https://www.youtube.com/@AbhisaurGroup" target="_blank">YT</a>
+        <a href="https://wa.me/919399313486" target="_blank">WA</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Services</div>
+      <ul class="footer-links">
+        <li><a href="/services#construction">Construction</a></li>
+        <li><a href="/services#interior">Interior Design</a></li>
+        <li><a href="/services#exterior">Exterior Design</a></li>
+        <li><a href="/services#planning">3D Planning</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Company</div>
+      <ul class="footer-links">
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Contact</div>
+      <div class="footer-contact-item">
+        <span class="footer-contact-icon">📍</span>
+        <span>Beside Greenland Marriage Garden, Dwarka Nagar, Rewa – 486001</span>
+      </div>
+      <div class="footer-contact-item">
+        <span class="footer-contact-icon">📞</span>
+        <span><a href="tel:+919399313486" style="color:var(--gray);text-decoration:none;">+91 93993 13486</a></span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 <span>Abhisaur Group</span>. All rights reserved.</div>
+    <div class="footer-copy">Crafted with ♥ in Rewa, MP</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919399313486" class="whatsapp-float" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.139.563 4.148 1.546 5.887L.057 23.943l6.212-1.458A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.793 9.793 0 01-5.034-1.388l-.361-.214-3.741.979 1.001-3.651-.235-.374A9.793 9.793 0 012.182 12c0-5.413 4.405-9.818 9.818-9.818 5.413 0 9.818 4.405 9.818 9.818 0 5.413-4.405 9.818-9.818 9.818z"/></svg>
+</a>
+
+<script src="/static/js/main.js"></script>
+<script>
+// Portfolio filter
+const filterBtns = document.querySelectorAll('.filter-btn');
+const items = document.querySelectorAll('.portfolio-item');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    items.forEach(item => {
+      if (filter === 'all' || item.dataset.category === filter) {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

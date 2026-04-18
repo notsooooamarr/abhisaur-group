@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Abhisaur Group</title>
+<link rel="stylesheet" href="/static/css/main.css">
+<style>
+.services-intro {
+  padding: 6rem 5%;
+  background: var(--dark);
+  text-align: center;
+}
+.services-intro .section-title { margin: 1rem 0 1.5rem; }
+.services-intro p {
+  color: var(--gray); max-width: 600px;
+  margin: 0 auto; line-height: 1.8;
+}
+.service-detail {
+  padding: 6rem 5%;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6rem; align-items: center;
+}
+.service-detail:nth-child(even) { background: var(--dark); }
+.service-detail.reverse { direction: rtl; }
+.service-detail.reverse > * { direction: ltr; }
+.service-detail-img {
+  height: 480px;
+  background: var(--dark3);
+  border: 1px solid rgba(201,168,76,0.15);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.service-detail-img-icon {
+  font-size: 5rem; opacity: 0.3;
+}
+.service-detail-img::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.service-anchor-id { position: absolute; top: -100px; }
+.service-detail-tag {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.5rem;
+}
+.service-detail-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700; color: var(--white);
+  line-height: 1.1; margin-bottom: 1rem;
+}
+.service-detail-title span { color: var(--gold); font-style: italic; }
+.service-detail-text {
+  color: var(--gray); line-height: 1.9;
+  font-size: 0.95rem; margin-bottom: 1.5rem;
+}
+.service-features { list-style: none; margin: 1.5rem 0 2rem; }
+.service-features li {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--gray-light); font-size: 0.9rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.service-features li::before {
+  content: '◆'; color: var(--gold); font-size: 0.5rem;
+  flex-shrink: 0;
+}
+.process-section {
+  padding: 8rem 5%;
+  background: var(--dark2);
+  text-align: center;
+}
+.process-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 0; margin-top: 4rem;
+  position: relative;
+}
+.process-grid::before {
+  content: ''; position: absolute;
+  top: 35px; left: 10%; right: 10%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dark), var(--gold), var(--gold-dark), transparent);
+}
+.process-step { padding: 0 1rem; position: relative; }
+.process-num {
+  width: 70px; height: 70px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 600; color: var(--gold);
+  margin: 0 auto 1.5rem;
+  background: var(--dark2);
+  position: relative; z-index: 1;
+  transition: all 0.3s;
+}
+.process-step:hover .process-num {
+  background: var(--gold); color: var(--black);
+}
+.process-step-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--white); margin-bottom: 0.5rem;
+}
+.process-step-text {
+  color: var(--gray); font-size: 0.8rem; line-height: 1.6;
+}
+.packages-section {
+  padding: 8rem 5%;
+}
+.packages-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px; background: rgba(201,168,76,0.1);
+  margin-top: 4rem;
+}
+.package-card {
+  background: var(--dark2);
+  padding: 3rem 2.5rem;
+  position: relative; transition: all 0.4s;
+}
+.package-card.featured {
+  background: var(--dark3);
+  border-top: 2px solid var(--gold);
+}
+.package-badge {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--black); background: var(--gold);
+  padding: 4px 12px;
+  position: absolute; top: 0; right: 2rem;
+}
+.package-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; font-weight: 600; color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.package-tagline { color: var(--gray); font-size: 0.85rem; margin-bottom: 2rem; }
+.package-features { list-style: none; margin-bottom: 2rem; }
+.package-features li {
+  display: flex; gap: 10px;
+  color: var(--gray-light); font-size: 0.85rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(201,168,76,0.06);
+}
+.package-features li .check { color: var(--gold); }
+@media (max-width: 768px) {
+  .service-detail { grid-template-columns: 1fr; gap: 2.5rem; }
+  .service-detail.reverse { direction: ltr; }
+  .process-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .process-grid::before { display: none; }
+  .packages-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-emblem">AS</div>
+    <span class="nav-logo-text">ABHISAUR <span>GROUP</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/services" class="active">Services</a></li>
+    <li><a href="/projects">Projects</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Quote</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <span class="mobile-close">✕</span>
+  <a href="/">Home</a><a href="/services">Services</a>
+  <a href="/projects">Projects</a><a href="/about">About</a>
+  <a href="/contact">Get Quote</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-bg-text">SERVICES</div>
+  <div class="page-hero-content">
+    <div class="page-breadcrumb"><a href="/">Home</a> → Services</div>
+    <h1 class="page-hero-title">Our <span>Services</span></h1>
+  </div>
+</div>
+
+<section class="services-intro">
+  <div class="section-tag reveal" style="justify-content:center;">What We Offer</div>
+  <h2 class="section-title reveal">Complete <span>Building Solutions</span></h2>
+  <p class="reveal" style="margin-top:1rem;">From the first sketch to the final coat of paint — Abhisaur Group delivers end-to-end construction and design services tailored to your needs and budget.</p>
+</section>
+
+<!-- CONSTRUCTION -->
+<section class="service-detail" style="position:relative;">
+  <div id="construction" class="service-anchor-id"></div>
+  <div class="service-detail-img reveal-left">
+    <div class="service-detail-img-icon">🏗️</div>
+  </div>
+  <div class="reveal-right">
+    <div class="service-detail-tag">Service 01</div>
+    <h2 class="service-detail-title">Full-Scale <span>Construction</span></h2>
+    <div class="gold-line"></div>
+    <p class="service-detail-text">We handle residential and commercial construction from foundation to finishing. Our team uses quality-approved materials and follows strict timelines to deliver structures built to last.</p>
+    <ul class="service-features">
+      <li>Residential home construction</li>
+      <li>Commercial building projects</li>
+      <li>Foundation & structural work</li>
+      <li>Plumbing & electrical integration</li>
+      <li>Flooring, tiling & finishing</li>
+      <li>Government-compliant construction</li>
+    </ul>
+    <a href="/contact" class="btn-gold">Get Construction Quote →</a>
+  </div>
+</section>
+
+<!-- INTERIOR -->
+<section class="service-detail reverse" style="position:relative;">
+  <div id="interior" class="service-anchor-id"></div>
+  <div class="service-detail-img reveal-right">
+    <div class="service-detail-img-icon">🛋️</div>
+  </div>
+  <div class="reveal-left">
+    <div class="service-detail-tag">Service 02</div>
+    <h2 class="service-detail-title">Interior <span>Design</span></h2>
+    <div class="gold-line"></div>
+    <p class="service-detail-text">Transform any space into a stunning environment that reflects your personality. We blend trending aesthetics with timeless design principles to create interiors you'll love for years.</p>
+    <ul class="service-features">
+      <li>Living room & bedroom design</li>
+      <li>Modular kitchen planning</li>
+      <li>False ceiling & lighting design</li>
+      <li>Custom furniture & fittings</li>
+      <li>Wallpaper & texture finishing</li>
+      <li>Complete turnkey interiors</li>
+    </ul>
+    <a href="/contact" class="btn-gold">Start Interior Project →</a>
+  </div>
+</section>
+
+<!-- EXTERIOR -->
+<section class="service-detail" style="position:relative;">
+  <div id="exterior" class="service-anchor-id"></div>
+  <div class="service-detail-img reveal-left">
+    <div class="service-detail-img-icon">🏠</div>
+  </div>
+  <div class="reveal-right">
+    <div class="service-detail-tag">Service 03</div>
+    <h2 class="service-detail-title">Exterior <span>Design</span></h2>
+    <div class="gold-line"></div>
+    <p class="service-detail-text">Your home's exterior is its first impression. We design striking facades, compound walls, gate designs, and landscaping that make your property stand out in the neighbourhood.</p>
+    <ul class="service-features">
+      <li>Facade & elevation design</li>
+      <li>Compound wall & gate design</li>
+      <li>Driveway & pathway planning</li>
+      <li>Exterior paint & cladding</li>
+      <li>Outdoor lighting design</li>
+      <li>Parking & garden planning</li>
+    </ul>
+    <a href="/contact" class="btn-gold">Design My Exterior →</a>
+  </div>
+</section>
+
+<!-- 3D PLANNING -->
+<section class="service-detail reverse" style="position:relative;">
+  <div id="planning" class="service-anchor-id"></div>
+  <div class="service-detail-img reveal-right">
+    <div class="service-detail-img-icon">📐</div>
+  </div>
+  <div class="reveal-left">
+    <div class="service-detail-tag">Service 04</div>
+    <h2 class="service-detail-title">3D Planning & <span>Visualization</span></h2>
+    <div class="gold-line"></div>
+    <p class="service-detail-text">See your dream space before a single brick is laid. Our photorealistic 3D renders and detailed floor plans help you make confident decisions and avoid costly changes mid-project.</p>
+    <ul class="service-features">
+      <li>Photorealistic 3D renders</li>
+      <li>Floor plan & layout planning</li>
+      <li>Elevation drawings</li>
+      <li>Material & color visualization</li>
+      <li>Walkthrough videos</li>
+      <li>Structural drawings</li>
+    </ul>
+    <a href="/contact" class="btn-gold">Get 3D Plan →</a>
+  </div>
+</section>
+
+<!-- RENOVATION -->
+<section class="service-detail" style="position:relative;">
+  <div id="renovation" class="service-anchor-id"></div>
+  <div class="service-detail-img reveal-left">
+    <div class="service-detail-img-icon">🔧</div>
+  </div>
+  <div class="reveal-right">
+    <div class="service-detail-tag">Service 05</div>
+    <h2 class="service-detail-title">Renovation & <span>Remodeling</span></h2>
+    <div class="gold-line"></div>
+    <p class="service-detail-text">Breathe new life into existing spaces. Whether it's a single room refresh or a complete home overhaul — we renovate with minimal disruption and maximum impact.</p>
+    <ul class="service-features">
+      <li>Full home renovation</li>
+      <li>Kitchen & bathroom remodeling</li>
+      <li>Flooring replacement</li>
+      <li>Wall demolition & restructuring</li>
+      <li>Paint & texture updates</li>
+      <li>Electrical & plumbing upgrades</li>
+    </ul>
+    <a href="/contact" class="btn-gold">Plan Renovation →</a>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="section-tag reveal" style="justify-content:center;">How We Work</div>
+  <h2 class="section-title reveal">Our Simple <span>Process</span></h2>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="process-num">01</div>
+      <div class="process-step-title">Consultation</div>
+      <div class="process-step-text">Free initial meeting to understand your vision, budget, and timeline.</div>
+    </div>
+    <div class="process-step reveal" style="transition-delay:0.1s">
+      <div class="process-num">02</div>
+      <div class="process-step-title">Design & Plan</div>
+      <div class="process-step-text">Our team creates detailed plans and 3D visualizations for your approval.</div>
+    </div>
+    <div class="process-step reveal" style="transition-delay:0.2s">
+      <div class="process-num">03</div>
+      <div class="process-step-title">Quotation</div>
+      <div class="process-step-text">Transparent, itemized costing with no hidden charges.</div>
+    </div>
+    <div class="process-step reveal" style="transition-delay:0.3s">
+      <div class="process-num">04</div>
+      <div class="process-step-title">Execution</div>
+      <div class="process-step-text">Expert team begins work with regular progress updates to you.</div>
+    </div>
+    <div class="process-step reveal" style="transition-delay:0.4s">
+      <div class="process-num">05</div>
+      <div class="process-step-title">Handover</div>
+      <div class="process-step-text">Final inspection, client walkthrough, and post-completion support.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages-section">
+  <div style="text-align:center;" class="reveal">
+    <div class="section-tag" style="justify-content:center;">Pricing</div>
+    <h2 class="section-title">Transparent <span>Packages</span></h2>
+    <p style="color:var(--gray);margin-top:1rem;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.8;">Contact us for exact quotes — these are starting ranges to help you plan.</p>
+  </div>
+  <div class="packages-grid">
+    <div class="package-card reveal">
+      <div class="package-name">Basic</div>
+      <div class="package-tagline">Essential construction & design</div>
+      <ul class="package-features">
+        <li><span class="check">◆</span> Basic floor plan</li>
+        <li><span class="check">◆</span> Standard materials</li>
+        <li><span class="check">◆</span> Single room interior</li>
+        <li><span class="check">◆</span> Basic electrical work</li>
+        <li><span class="check">◆</span> Project supervision</li>
+      </ul>
+      <a href="/contact" class="btn-outline">Get Quote →</a>
+    </div>
+    <div class="package-card featured reveal" style="transition-delay:0.1s">
+      <div class="package-badge">Most Popular</div>
+      <div class="package-name">Premium</div>
+      <div class="package-tagline">Complete home solution</div>
+      <ul class="package-features">
+        <li><span class="check">◆</span> Full 3D planning</li>
+        <li><span class="check">◆</span> Premium materials</li>
+        <li><span class="check">◆</span> Full home interior</li>
+        <li><span class="check">◆</span> Complete electrical & plumbing</li>
+        <li><span class="check">◆</span> Exterior design included</li>
+        <li><span class="check">◆</span> Dedicated project manager</li>
+      </ul>
+      <a href="/contact" class="btn-gold">Get Quote →</a>
+    </div>
+    <div class="package-card reveal" style="transition-delay:0.2s">
+      <div class="package-name">Luxury</div>
+      <div class="package-tagline">High-end custom experience</div>
+      <ul class="package-features">
+        <li><span class="check">◆</span> Custom architect plans</li>
+        <li><span class="check">◆</span> Luxury material selection</li>
+        <li><span class="check">◆</span> Smart home integration</li>
+        <li><span class="check">◆</span> Italian/imported finishes</li>
+        <li><span class="check">◆</span> Landscape design</li>
+        <li><span class="check">◆</span> White-glove service</li>
+      </ul>
+      <a href="/contact" class="btn-outline">Get Quote →</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" style="padding:6rem 5%;background:var(--dark2);text-align:center;">
+  <h2 class="section-title reveal">Ready to <span>Begin?</span></h2>
+  <p class="cta-subtitle reveal">Book a free consultation today — no commitment, just clarity.</p>
+  <div class="cta-btns reveal">
+    <a href="/contact" class="btn-gold">Book Free Consultation →</a>
+    <a href="https://wa.me/919399313486" target="_blank" class="btn-outline">💬 WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">ABHISAUR <span>GROUP</span></div>
+      <p class="footer-desc">Budget-friendly construction and interior design services in Rewa, MP.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/abhisaurgroup/" target="_blank">IG</a>
+        <a href="https://www.youtube.com/@AbhisaurGroup" target="_blank">YT</a>
+        <a href="https://wa.me/919399313486" target="_blank">WA</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Services</div>
+      <ul class="footer-links">
+        <li><a href="#construction">Construction</a></li>
+        <li><a href="#interior">Interior Design</a></li>
+        <li><a href="#exterior">Exterior Design</a></li>
+        <li><a href="#planning">3D Planning</a></li>
+        <li><a href="#renovation">Renovation</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Company</div>
+      <ul class="footer-links">
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Contact</div>
+      <div class="footer-contact-item">
+        <span class="footer-contact-icon">📍</span>
+        <span>Beside Greenland Marriage Garden, Dwarka Nagar, Rewa – 486001</span>
+      </div>
+      <div class="footer-contact-item">
+        <span class="footer-contact-icon">📞</span>
+        <span><a href="tel:+919399313486" style="color:var(--gray);text-decoration:none;">+91 93993 13486</a></span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 <span>Abhisaur Group</span>. All rights reserved.</div>
+    <div class="footer-copy">Crafted with ♥ in Rewa, MP</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919399313486" class="whatsapp-float" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.139.563 4.148 1.546 5.887L.057 23.943l6.212-1.458A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.793 9.793 0 01-5.034-1.388l-.361-.214-3.741.979 1.001-3.651-.235-.374A9.793 9.793 0 012.182 12c0-5.413 4.405-9.818 9.818-9.818 5.413 0 9.818 4.405 9.818 9.818 0 5.413-4.405 9.818-9.818 9.818z"/></svg>
+</a>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>
